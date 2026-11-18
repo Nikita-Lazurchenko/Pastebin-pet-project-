@@ -10,6 +10,6 @@ public class PasteCreateDto {
     private String expiration;
     private String access;
     private String hasPassOrNo;
-    private String password;
+    private String twoFactorAuthentication;
     private String title;
 }
