@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Data
 @ToString(exclude = {"user"})
-@EqualsAndHashCode(of="pasteLink")
+@EqualsAndHashCode(of="pasteHash")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,13 +21,14 @@ public class Paste implements BaseEntity<Long>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "paste_link", nullable = false, unique = true)
-    private String pasteLink;
+    @Column(name = "paste_hash", nullable = false, unique = true)
+    private String pasteHash;
 
-    @Column(name = "file_name", nullable = false, unique = true)
-    private String file_name;
+    @Column(name = "google_file_id", unique = true)
+    private String googleFileId;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Category category;
 
     @JdbcTypeCode(SqlTypes.ARRAY)
@@ -35,18 +36,20 @@ public class Paste implements BaseEntity<Long>{
     private Set<String> tags;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Expiration expiration;
 
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "deleted_at", nullable = false)
     private LocalDateTime deletedAt;
 
     @Enumerated(EnumType.STRING)
     private Access access;
 
-    private String password;
+    @Column(name = "two_factor_authentication", nullable = false)
+    private Boolean twoFactorAuthentication;
 
     @Column(nullable = false)
     private String title;

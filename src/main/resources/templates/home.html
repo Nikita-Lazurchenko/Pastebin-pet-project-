@@ -82,18 +82,18 @@
                                         th:text="${acc}"></option>
                             </select>
                         </div>
-                        <div class="setting-item">
-                            <label>Two-Factor Authentication</label>
-                            <div class="radio-group" data-tooltip="When you enable the Two-Factor Authentication option, you will receive an email with a password to access paste">
-                                <label class="radio-item">
-                                    <input type="radio" name="twoFactorAuthentication" value="on">
-                                    <span>ОN</span>
-                                </label>
-                                <label class="radio-item">
-                                    <input type="radio" name="twoFactorAuthentication" value="off" checked>
-                                    <span>OFF</span>
-                                </label>
-                            </div>
+                    </div>
+                    <div class="setting-item">
+                        <label>Two-Factor Authentication</label>
+                        <div class="radio-group" data-tooltip="When you enable the Two-Factor Authentication option, you will receive an email with a password to access paste">
+                            <label class="radio-item">
+                                <input type="radio" th:field="*{twoFactorAuthentication}" th:value="'ON'">
+                                <span>ON</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" th:field="*{twoFactorAuthentication}" th:value="'OFF'">
+                                <span>OFF</span>
+                            </label>
                         </div>
                     </div>
 

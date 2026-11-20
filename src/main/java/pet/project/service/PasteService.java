@@ -9,21 +9,23 @@ import pet.project.database.entity.User;
 import pet.project.database.repository.PasteRepository;
 import pet.project.dto.PasteCreateDto;
 import pet.project.mapper.PasteCreateMapper;
+import pet.project.storage_pastes.LocalDriveService;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PasteService {
     private final PasteCreateMapper pasteCreateMapper;
-    private final UserService userService;
     private final PasteRepository pasteRepository;
+    private final LocalDriveService localDriveService;
 
     @Transactional
-    public Paste save(PasteCreateDto pasteCreateDto, Long userId) {
-        User user = userService.findById(userId);
-
+    public Paste save(PasteCreateDto pasteCreateDto, User user) {
         Paste paste = pasteCreateMapper.mapFrom(pasteCreateDto);
         paste.setUser(user);
+
+        String pasteHash = localDriveService.uploadPasteToDrive(pasteCreateDto.getPaste());
+        paste.setPasteHash(pasteHash);
 
         try {
             return pasteRepository.save(paste);

@@ -1,10 +1,7 @@
 package pet.project.mapper;
 
 import org.springframework.stereotype.Component;
-import pet.project.database.entity.Access;
-import pet.project.database.entity.Category;
-import pet.project.database.entity.Expiration;
-import pet.project.database.entity.Paste;
+import pet.project.database.entity.*;
 import pet.project.dto.PasteCreateDto;
 
 
@@ -23,7 +20,8 @@ public class PasteCreateMapper implements Mapper<Paste, PasteCreateDto> {
                 .createdAt(LocalDateTime.now())
                 .deletedAt(Expiration.fromDescription(pasteCreateDto.getExpiration()).getExpirationDate())
                 .access(Access.valueOf(pasteCreateDto.getAccess().toUpperCase()))
-                .password(pasteCreateDto.getTwoFactorAuthentication())
+                .twoFactorAuthentication(TwoFactorAuthentication
+                        .valueOf(pasteCreateDto.getTwoFactorAuthentication().toUpperCase()).isEnabled())
                 .title(pasteCreateDto.getTitle())
                 .build();
     }

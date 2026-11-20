@@ -9,7 +9,6 @@ public class PasteCreateDto {
     private String tag;
     private String expiration;
     private String access;
-    private String hasPassOrNo;
     private String twoFactorAuthentication;
     private String title;
 }

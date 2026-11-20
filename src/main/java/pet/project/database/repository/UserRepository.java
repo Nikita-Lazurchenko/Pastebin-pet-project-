@@ -3,7 +3,6 @@ package pet.project.database.repository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pet.project.database.entity.User;
@@ -32,4 +31,13 @@ public class UserRepository {
         return Optional.ofNullable(entityManager.find(User.class, id));
     }
 
+    @Transactional(readOnly = true)
+    public Optional<User> findUserByUsername(String username){
+        return entityManager.createQuery(
+                        "SELECT u FROM User u WHERE u.username = :username",
+                        User.class)
+                .setParameter("username",username)
+                .getResultStream()
+                .findFirst();
+    }
 }
