@@ -28,12 +28,24 @@ public class LocalDriveService {
         Path path = Paths.get(pathToLocalDrive, fileName).normalize();
 
         try {
-            Files.write(path, paste.getBytes(StandardCharsets.UTF_8));
+            Files.writeString(path, paste);
         } catch (IOException e) {
             log.error("Error writing file to local disk: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to save paste", e);
         }
 
         return pasteHash;
+    }
+
+    public String downloadPasteFromDrive(String pasteHash) {
+        String fileName = pasteHash + ".txt";
+
+        Path path = Paths.get(pathToLocalDrive, fileName).normalize();
+
+        try{
+           return Files.readString(path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

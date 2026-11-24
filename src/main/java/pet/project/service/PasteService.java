@@ -8,7 +8,10 @@ import pet.project.database.entity.Paste;
 import pet.project.database.entity.User;
 import pet.project.database.repository.PasteRepository;
 import pet.project.dto.PasteCreateDto;
+import pet.project.dto.PasteViewDto;
+import pet.project.exception.PasteNotFoundException;
 import pet.project.mapper.PasteCreateMapper;
+import pet.project.mapper.PasteViewMapper;
 import pet.project.storage_pastes.LocalDriveService;
 
 @Slf4j
@@ -16,6 +19,7 @@ import pet.project.storage_pastes.LocalDriveService;
 @RequiredArgsConstructor
 public class PasteService {
     private final PasteCreateMapper pasteCreateMapper;
+    private final PasteViewMapper pasteViewMapper;
     private final PasteRepository pasteRepository;
     private final LocalDriveService localDriveService;
 
@@ -33,6 +37,23 @@ public class PasteService {
             log.error("Paste save error", e);
             throw new RuntimeException("Could not save paste", e);
         }
+    }
+
+    @Transactional
+    public PasteViewDto findByHash(String hash) {
+        Paste paste;
+        try {
+            paste = pasteRepository.findByHash(hash).orElseThrow();
+        }catch (Exception e){
+            log.info("Paste with hash {} not found", hash);
+            throw new PasteNotFoundException("Paste not found %s".formatted(hash));
+        }
+
+        PasteViewDto pasteViewDto = pasteViewMapper.mapFrom(paste);
+        String textPaste = localDriveService.downloadPasteFromDrive(pasteViewDto.getHash());
+        pasteViewDto.setPaste(textPaste);
+
+        return pasteViewDto;
     }
 
 }

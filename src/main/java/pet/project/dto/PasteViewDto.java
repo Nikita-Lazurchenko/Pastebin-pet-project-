@@ -1,0 +1,21 @@
+package pet.project.dto;
+
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
+public class PasteViewDto {
+    private String hash;
+    private String paste;
+    private String category;
+    private String tag;
+    private String expiration;
+    private String createdAtRelative;
+    private String access;
+    private Boolean twoFactorAuthentication;
+    private String title;
+    private String views;
+    private Long userId;
+    private String username;
+}
