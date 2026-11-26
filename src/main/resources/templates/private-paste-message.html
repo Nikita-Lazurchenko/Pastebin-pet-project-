@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приватная paste| Pastebin</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home_nav.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/two_factor_sent_body.css}">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+    <style></style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-bar">
+        <i class="bx bx-menu sidebarOpen"></i>
+        <span class="logo navLogo"><a href="#">Pastebin</a></span>
+
+        <div class="menu">
+            <div class="logo-toggle">
+                <span class="logo"><a href="#">Pastebin</a></span>
+                <i class='bx bx-x sidebarClose'></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/public-pastes/0">Publications</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Developer portfolio</a></li>
+                <li><a href="https://github.com/Nikita-Lazurchenko">GitHub</a></li>
+            </ul>
+        </div>
+
+        <div class="darkLight">
+            <div class="dark-light">
+                <i class='bx bx-moon moon'></i>
+                <i class='bx bx-sun sun'></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="message-card">
+        <div class="message-icon">
+            <i class='bx bx-lock-alt'></i>
+        </div>
+
+        <h1 class="message-title">Доступ ограничен</h1>
+
+        <p class="message-text">
+            Эта паста имеет статус <span class="email-highlight">PRIVATE</span>.
+            <br><br>
+            Автор ограничил публичный просмотр данного материала. Текст доступен только создателю пасты из-под его учётной записи.
+        </p>
+
+        <a href="/" class="btn-home">На главную</a>
+    </div>
+</div>
+<script th:src="@{/js/home_script.js}"></script>
+</body>
+</html>
